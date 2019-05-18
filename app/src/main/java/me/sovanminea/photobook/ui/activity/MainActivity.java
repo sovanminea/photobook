@@ -1,7 +1,9 @@
-package me.sovanminea.photobook;
+package me.sovanminea.photobook.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import me.sovanminea.photobook.R;
 
 public class MainActivity extends AppCompatActivity {
 
