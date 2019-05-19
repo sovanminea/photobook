@@ -53,6 +53,7 @@ public class HomeActivity extends BaseActivity implements Home.HomeView, LoadIma
         recyclerView = findViewById(R.id.photo_list);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
+        swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(true);
 
         setupRecycler();
