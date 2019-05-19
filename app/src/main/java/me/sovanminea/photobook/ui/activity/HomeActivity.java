@@ -1,6 +1,8 @@
 package me.sovanminea.photobook.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import java.util.List;
@@ -14,6 +16,13 @@ public class HomeActivity extends BaseActivity implements Home.HomeView {
 
     private Home.HomePresenter mHomePresenter;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
+
+    private void setupRecycler(){
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +30,15 @@ public class HomeActivity extends BaseActivity implements Home.HomeView {
 
         mHomePresenter = new HomePresenterImpl(this);
         mHomePresenter.getImages();
+
+        swipeRefreshLayout = findViewById(R.id.swp);
+        recyclerView = findViewById(R.id.photo_list);
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
+        swipeRefreshLayout.setRefreshing(true);
+
+        setupRecycler();
+
     }
 
     @Override
@@ -32,4 +50,5 @@ public class HomeActivity extends BaseActivity implements Home.HomeView {
     public void onError(String message) {
         Log.d("ERROR", message);
     }
+
 }
