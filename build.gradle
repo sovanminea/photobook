@@ -20,6 +20,10 @@ allprojects {
         jcenter()
         
     }
+    ext {
+        serverDebugBaseUrl = "\"https://picsum.photos/\""
+        serverReleaseBaseUrl = "\"https://picsum.photos/\""
+    }
 }
 
 task clean(type: Delete) {
