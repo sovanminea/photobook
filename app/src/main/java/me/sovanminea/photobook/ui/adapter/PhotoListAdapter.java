@@ -3,6 +3,7 @@ package me.sovanminea.photobook.ui.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
     private OnItemClickListener mOnItemClickListener;
     private Context mContext;
     private RequestOptions requestOptions = new RequestOptions();
-
+    private GridLayoutManager mManager;
 
     @SuppressLint("CheckResult")
     public PhotoListAdapter(Context context, List<PhotoModel> dataItems, RecyclerView recyclerView, LoadImageListener listener, OnItemClickListener onItemClickListener) {
@@ -36,6 +37,15 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
         mContext = context;
         requestOptions.placeholder(R.color.colorAccent);
         requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+        this.mManager = (GridLayoutManager) recyclerView.getLayoutManager();
+
+        mManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return getItemViewType(position) == VIEW_PROG ? mManager.getSpanCount() : 1;
+            }
+        });
     }
 
     @Override

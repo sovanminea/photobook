@@ -15,6 +15,7 @@ import me.sovanminea.photobook.R;
 import me.sovanminea.photobook.listener.LoadImageListener;
 import me.sovanminea.photobook.listener.OnItemClickListener;
 import me.sovanminea.photobook.model.PhotoModel;
+import me.sovanminea.photobook.ui.adapter.BaseLoadMoreAdapter;
 import me.sovanminea.photobook.ui.adapter.ItemOffsetDecoration;
 import me.sovanminea.photobook.ui.adapter.PhotoListAdapter;
 import me.sovanminea.photobook.ui.animator.SlideInUpAnimator;
@@ -32,15 +33,13 @@ public class HomeActivity extends BaseActivity implements Home.HomeView, LoadIma
     private List<PhotoModel> mItemList = new ArrayList<>();
 
     private void setupRecycler() {
-
         recyclerView.setHasFixedSize(true);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(gridLayoutManager);
         mPhotoListAdapter = new PhotoListAdapter(getApplicationContext(), mItemList, recyclerView, this, this);
         recyclerView.setAdapter(mPhotoListAdapter);
         recyclerView.setItemAnimator(new SlideInUpAnimator());
-        recyclerView.addItemDecoration(new ItemOffsetDecoration(4));
+        recyclerView.addItemDecoration(new ItemOffsetDecoration(5));
     }
 
     @Override
@@ -73,13 +72,12 @@ public class HomeActivity extends BaseActivity implements Home.HomeView, LoadIma
 
     @Override
     public void onError(String message) {
-        Log.d("ERROR", message);
         swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onLoadMore() {
-
+        mPhotoListAdapter.enableLoadingBottom();
     }
 
 

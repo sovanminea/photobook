@@ -1,7 +1,9 @@
 package me.sovanminea.photobook.ui.adapter;
 
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,11 @@ import java.util.List;
 import me.sovanminea.photobook.Config;
 import me.sovanminea.photobook.R;
 import me.sovanminea.photobook.listener.LoadImageListener;
-import me.sovanminea.photobook.util.NetworkUtil;
 
 public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_ITEM = 1;
-    private static final int VIEW_PROG = 0;
+    protected static final int VIEW_PROG = 0;
     private List<T> dataItems;
     private LoadImageListener mLoadImageListener;
     private RecyclerView mRecyclerView;
@@ -25,6 +26,7 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
     private int lastVisibleItem;
     private boolean loading = true;
     private boolean isAll = false;
+    private int previousItemCount;
 
     public static class ProgressViewHolder extends RecyclerView.ViewHolder {
         ProgressBar mProgressBar;
@@ -46,22 +48,29 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
         if (this.getItemCount() == 0) {
             mLoadImageListener.onLoadFirst();
         }
-//        if (mRecyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-//            final LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-//            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//                @Override
-//                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                    super.onScrolled(recyclerView, dx, dy);
-//                    totalItemCount = layoutManager.getItemCount();
-//                    lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-//                    if (NetworkUtil.isNetworkAvailable(recyclerView.getContext()) && !isAll && !loading &&
-//                            totalItemCount <= (lastVisibleItem + Config.QUERY_LIMIT)) {
-//                        loading = true;
-//                        mLoadImageListener.onLoadMore();
-//                    }
-//                }
-//            });
-//        }
+        if (mRecyclerView.getLayoutManager() instanceof GridLayoutManager) {
+//            reset();
+            final GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    if (dy > 0) {
+                        int itemCount = layoutManager.getItemCount();
+
+//                        if (itemCount != previousItemCount) {
+//                            loading = false;
+//                        }
+
+                        if (!loading && layoutManager.findLastVisibleItemPosition() >= itemCount - 1) {
+                            previousItemCount = itemCount;
+                            mLoadImageListener.onLoadMore();
+                            loading = true;
+                        }
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -108,11 +117,13 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
         if (getItemCount() != 0) {
             dataItems.remove(dataItems.size() - 1);
             notifyItemRemoved(dataItems.size());
+            loading = false;
         }
     }
 
     public void enableLoadingBottom() {
-        if (getItemCount() != 0) {
+        Log.d("loading", "" + loading);
+        if (getItemCount() != 0 && !loading) {
             dataItems.add(null);
             mRecyclerView.post(new Runnable() {
                 @Override
@@ -121,6 +132,11 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
                 }
             });
         }
+    }
+
+    public void reset() {
+        this.loading = false;
+        this.previousItemCount = -1;
     }
 
     public void clear() {
