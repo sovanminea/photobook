@@ -37,6 +37,7 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
         mContext = context;
         requestOptions.placeholder(R.color.colorAccent);
         requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        requestOptions.skipMemoryCache(true);
 
         this.mManager = (GridLayoutManager) recyclerView.getLayoutManager();
 
@@ -58,6 +59,7 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
     public void onBindData(PhotoListViewHolder holder, PhotoModel data, int position) {
         Glide.with(mContext)
                 .load(data.getDownloadUrl())
+                .thumbnail(/*sizeMultiplier=*/ 0.10f)
                 .transition(withCrossFade())
                 .apply(requestOptions)
                 .into(holder.imageView);

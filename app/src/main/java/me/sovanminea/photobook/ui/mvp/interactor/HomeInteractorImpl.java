@@ -15,8 +15,8 @@ public class HomeInteractorImpl extends RequestInteractorImpl<List<PhotoModel>> 
     }
 
     @Override
-    public void onGetImages() {
-        mCall = RetrofitManager.getApiService().getPhotoList();
+    public void onGetImages(int page) {
+        mCall = RetrofitManager.getApiService().getPhotoList(page);
         mCall.enqueue(this);
     }
 }

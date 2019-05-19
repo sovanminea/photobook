@@ -18,8 +18,8 @@ public class HomePresenterImpl implements Home.HomePresenter, BaseResponseListen
     }
 
     @Override
-    public void getImages() {
-        mHomeInteractor.onGetImages();
+    public void getImages(int page) {
+        mHomeInteractor.onGetImages(page);
     }
 
     @Override

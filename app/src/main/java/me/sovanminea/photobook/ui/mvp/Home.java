@@ -7,11 +7,11 @@ import me.sovanminea.photobook.model.PhotoModel;
 public class Home {
 
     public interface HomePresenter {
-        void getImages();
+        void getImages(int page);
     }
 
     public interface HomeInteractor {
-        void onGetImages();
+        void onGetImages(int page);
     }
 
     public interface HomeView {
