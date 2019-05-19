@@ -3,7 +3,7 @@ package me.sovanminea.photobook.ui.mvp.interactor;
 import java.util.List;
 
 import me.sovanminea.photobook.model.PhotoModel;
-import me.sovanminea.photobook.model.response.BaseResponseListener;
+import me.sovanminea.photobook.listener.BaseResponseListener;
 
 import me.sovanminea.photobook.restclient.RetrofitManager;
 import me.sovanminea.photobook.ui.mvp.Home;

@@ -2,10 +2,7 @@ package me.sovanminea.photobook.ui.mvp.interactor;
 
 import android.util.Log;
 
-import java.util.List;
-
-import me.sovanminea.photobook.model.PhotoModel;
-import me.sovanminea.photobook.model.response.BaseResponseListener;
+import me.sovanminea.photobook.listener.BaseResponseListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

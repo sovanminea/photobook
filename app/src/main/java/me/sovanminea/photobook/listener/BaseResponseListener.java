@@ -1,4 +1,4 @@
-package me.sovanminea.photobook.model.response;
+package me.sovanminea.photobook.listener;
 
 public interface BaseResponseListener<T> {
 
