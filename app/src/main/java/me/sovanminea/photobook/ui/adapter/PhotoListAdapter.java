@@ -38,7 +38,6 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
         requestOptions.placeholder(R.color.colorAccent);
         requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         requestOptions.skipMemoryCache(true);
-
         this.mManager = (GridLayoutManager) recyclerView.getLayoutManager();
 
         mManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

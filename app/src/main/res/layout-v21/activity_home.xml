@@ -6,54 +6,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activity.HomeActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+    <include layout="@layout/toolbar" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_below="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/background_light"
-        android:elevation="@dimen/no_padding"
-        android:theme="@style/ToolbarTheme"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:src="@drawable/photo_book_logo_horizontal" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.Toolbar>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/my_toolbar">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/photo_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:splitMotionEvents="false" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-    <TextView
-        android:id="@+id/tv_no_data"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/no_data"
-        android:visibility="gone" />
+        android:minHeight="?actionBarSize"
+        app:tabRippleColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="1dp"
+        app:tabBackground="@android:color/background_light"
+        app:tabMode="fixed"
+        tools:ignore="UnknownIdInLayout" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_below="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
