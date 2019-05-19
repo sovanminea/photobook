@@ -1,5 +1,9 @@
 package me.sovanminea.photobook.ui.mvp;
 
+import java.util.List;
+
+import me.sovanminea.photobook.model.PhotoModel;
+
 public class Home {
 
     public interface HomePresenter {
@@ -11,6 +15,7 @@ public class Home {
     }
 
     public interface HomeView {
-        void onImagesResponse(String img);
+        void onImagesResponse(List<PhotoModel> photoListResponse);
+        void onError(String message);
     }
 }
