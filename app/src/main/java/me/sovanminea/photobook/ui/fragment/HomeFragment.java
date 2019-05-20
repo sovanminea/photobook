@@ -21,10 +21,11 @@ import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.adapter.ItemOffsetDecoration;
 import me.sovanminea.photobook.ui.adapter.PhotoListAdapter;
 import me.sovanminea.photobook.ui.animator.SlideInUpAnimator;
+import me.sovanminea.photobook.ui.mvp.FragmentNavigationVP;
 import me.sovanminea.photobook.ui.mvp.HomeFragmentVP;
 import me.sovanminea.photobook.ui.mvp.presenter.HomeFragmentPresenterImpl;
 
-public class HomeFragment extends Fragment implements LoadImageListener, OnItemClickListener, HomeFragmentVP.HomeFragmentView {
+public class HomeFragment extends Fragment implements LoadImageListener, OnItemClickListener, HomeFragmentVP.HomeFragmentView, FragmentNavigationVP.View {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment implements LoadImageListener, OnItemC
     private int page = 1;
 
     private HomeFragmentVP.HomeFragmentPresenter homeFragmentPresenter;
+    private FragmentNavigationVP.Presenter presenter;
 
     private void setupRecycler(View v) {
         recyclerView.setHasFixedSize(true);
@@ -92,6 +94,11 @@ public class HomeFragment extends Fragment implements LoadImageListener, OnItemC
 
     @Override
     public void onItemClick(View view, int position) {
+        presenter.getPhotoClicked(mPhotoListAdapter.getItem(position));
+    }
 
+    @Override
+    public void attachPresenter(FragmentNavigationVP.Presenter presenter) {
+        this.presenter = presenter;
     }
 }

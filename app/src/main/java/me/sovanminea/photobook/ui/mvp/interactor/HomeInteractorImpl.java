@@ -6,6 +6,7 @@ import me.sovanminea.photobook.ui.adapter.TabAdapter;
 import me.sovanminea.photobook.ui.fragment.BookmarkFragment;
 import me.sovanminea.photobook.ui.fragment.HomeFragment;
 import me.sovanminea.photobook.ui.mvp.Home;
+import me.sovanminea.photobook.ui.mvp.presenter.HomePresenterImpl;
 
 public class HomeInteractorImpl implements Home.HomeInteractor {
 
@@ -14,15 +15,14 @@ public class HomeInteractorImpl implements Home.HomeInteractor {
     }
 
     public HomeInteractorImpl() {
-
     }
 
-
-
     @Override
-    public void onSetupPagerAdapter(FragmentManager fm, OnPagerAdapterSetup onPagerAdapterSetup) {
+    public void onSetupPagerAdapter(FragmentManager fm, HomePresenterImpl presenter, OnPagerAdapterSetup onPagerAdapterSetup) {
+        HomeFragment homeFragment = new HomeFragment();
+        homeFragment.attachPresenter(presenter);
         TabAdapter tabAdapter = new TabAdapter(fm);
-        tabAdapter.addFragment(new HomeFragment(), "Photos");
+        tabAdapter.addFragment(homeFragment, "Photos");
         tabAdapter.addFragment(new BookmarkFragment(), "Bookmarks");
         onPagerAdapterSetup.onAdapterFinish(tabAdapter);
     }
