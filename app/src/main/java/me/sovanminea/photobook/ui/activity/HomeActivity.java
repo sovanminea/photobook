@@ -1,9 +1,10 @@
 package me.sovanminea.photobook.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.view.View;
 
 import me.sovanminea.photobook.R;
 import me.sovanminea.photobook.model.PhotoModel;
@@ -16,6 +17,7 @@ public class HomeActivity extends BaseActivity implements Home.HomeView {
 
     private Home.HomePresenter mHomePresenter;
 
+    private AppBarLayout appBarLayout;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -26,6 +28,7 @@ public class HomeActivity extends BaseActivity implements Home.HomeView {
 
         mHomePresenter = new HomePresenterImpl(this);
 
+        appBarLayout = findViewById(R.id.app_bar);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
@@ -40,10 +43,12 @@ public class HomeActivity extends BaseActivity implements Home.HomeView {
 
     @Override
     public void getPhotoClicked(PhotoModel model) {
+        appBarLayout.setVisibility(View.GONE);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_layout, new DetailFragment())
                 .commit();
+
     }
 
 }
