@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment implements LoadImageListener, OnItemC
         mPhotoListAdapter = new PhotoListAdapter(v.getContext(), mItemList, recyclerView, this, this);
         recyclerView.setAdapter(mPhotoListAdapter);
         recyclerView.setItemAnimator(new SlideInUpAnimator());
-        recyclerView.addItemDecoration(new ItemOffsetDecoration(5));
+        recyclerView.addItemDecoration(new ItemOffsetDecoration(10));
     }
 
     @Nullable

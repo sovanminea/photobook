@@ -13,8 +13,8 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
-    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
-
+    <style name="TabLayoutStyle"  parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
     </style>
 
 </resources>

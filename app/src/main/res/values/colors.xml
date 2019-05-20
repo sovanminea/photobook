@@ -7,4 +7,7 @@
     <color name="refresh_progress_1">#8CD867</color>
     <color name="refresh_progress_2">#FFE46196</color>
     <color name="refresh_progress_3">#5b97d1</color>
+
+    <color name="image_placeholder">#80323232</color>
+    <color name="background_image_detail">#80000000</color>
 </resources>

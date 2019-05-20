@@ -2,6 +2,7 @@ package me.sovanminea.photobook.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,7 +36,7 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
         super(dataItems, recyclerView, listener);
         mOnItemClickListener = onItemClickListener;
         mContext = context;
-        requestOptions.placeholder(R.color.colorAccent);
+        requestOptions.placeholder(R.color.image_placeholder);
         requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         requestOptions.skipMemoryCache(true);
         this.mManager = (GridLayoutManager) recyclerView.getLayoutManager();
@@ -71,6 +72,9 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
         PhotoListViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                imageView.setClipToOutline(true);
+            }
             itemView.setOnClickListener(this);
         }
 
