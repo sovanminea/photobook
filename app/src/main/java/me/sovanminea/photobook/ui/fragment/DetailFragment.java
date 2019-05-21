@@ -15,9 +15,10 @@ import android.view.ViewGroup;
 
 import me.sovanminea.photobook.R;
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment implements View.OnClickListener {
 
-    private Toolbar toolbar;
+    private View back;
+    private View bookmark;
 
     @Nullable
     @Override
@@ -29,7 +30,8 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = view.findViewById(R.id.toolbar);
+        bookmark = view.findViewById(R.id.bookmark);
+        bookmark.setOnClickListener(this);
     }
 
     @Override
@@ -41,5 +43,12 @@ public class DetailFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.bookmark_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.bookmark) {
+            bookmark.setActivated(!bookmark.isActivated());
+        }
     }
 }

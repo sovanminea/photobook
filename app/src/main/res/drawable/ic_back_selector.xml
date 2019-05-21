@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/image_placeholder" />
+                    <size android:width="20dp" android:height="28dp" />
+                    <padding android:bottom="@dimen/x2_dimen" android:left="@dimen/x2_dimen" android:right="@dimen/x2_dimen" android:top="@dimen/x2_dimen" />
+                    <corners android:radius="@dimen/x2_dimen" />
+                </shape>
+            </item>
+            <item android:drawable="@drawable/ic_back" />
+        </layer-list>
+    </item>
+    <item android:drawable="@drawable/ic_back" />
+</selector>
