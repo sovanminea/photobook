@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-
 import me.sovanminea.photobook.R;
 import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.adapter.TabAdapter;
@@ -43,9 +41,10 @@ public class HomeActivity extends BaseActivity implements Home.HomeView {
 
     @Override
     public void getPhotoClicked(PhotoModel model) {
-        appBarLayout.setVisibility(View.GONE);
         getSupportFragmentManager()
                 .beginTransaction()
+                .setCustomAnimations(R.animator.slide_in, R.animator.slide_down, R.animator.slide_in, R.animator.slide_down)
+                .addToBackStack("Detail")
                 .replace(R.id.frame_layout, new DetailFragment())
                 .commit();
 
