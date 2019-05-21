@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,18 +57,26 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
     }
 
     @Override
-    public void onBindData(PhotoListViewHolder holder, PhotoModel data, int position) {
+    public void onBindData(final PhotoListViewHolder holder, PhotoModel data, int position) {
+        ViewCompat.setTransitionName(holder.imageView, String.valueOf(position) + "_image");
         Glide.with(mContext)
                 .load(data.getDownloadUrl())
                 .thumbnail(/*sizeMultiplier=*/ 0.10f)
                 .transition(withCrossFade())
                 .apply(requestOptions)
                 .into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mOnItemClickListener != null)
+                    mOnItemClickListener.onItemClick(holder, holder.getAdapterPosition());
+            }
+        });
     }
 
-    public class PhotoListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class PhotoListViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageView;
+        public ImageView imageView;
 
         PhotoListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,13 +84,7 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageView.setClipToOutline(true);
             }
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            if (mOnItemClickListener != null)
-                mOnItemClickListener.onItemClick(view, getAdapterPosition());
-        }
     }
 }

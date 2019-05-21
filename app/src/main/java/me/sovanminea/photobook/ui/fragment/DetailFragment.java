@@ -1,41 +1,61 @@
 package me.sovanminea.photobook.ui.fragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import me.sovanminea.photobook.R;
+import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.mvp.DetailFragmentVP;
 import me.sovanminea.photobook.ui.mvp.presenter.DetailFragmentPresenterImpl;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 public class DetailFragment extends Fragment implements View.OnClickListener, DetailFragmentVP.DetailFragmentView {
 
+    private PhotoModel model;
     private View back;
     private View bookmark;
+//    private RequestOptions requestOptions = new RequestOptions();
 
     private DetailFragmentVP.DetailFramentPresenter detailFragmentPresenter;
+
+    public void setPhotoModel(PhotoModel model) {
+        this.model = model;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_detail, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ImageView imageView = view.findViewById(R.id.image_view);
+        Glide.with(this)
+                .load(model.getDownloadUrl())
+                .thumbnail(/*sizeMultiplier=*/ 0.25f)
+                .transition(withCrossFade())
+                .apply(RequestOptions
+                        .placeholderOf(R.color.image_placeholder)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .dontAnimate()
+                        .dontTransform()
+                )
+                .into(imageView);
+
         bookmark = view.findViewById(R.id.bookmark);
         back = view.findViewById(R.id.back);
 
@@ -43,7 +63,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
         back.setOnClickListener(this);
 
         detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
-        detailFragmentPresenter.setFragmentLoaded();
     }
 
     @Override

@@ -13,6 +13,7 @@
         android:layout_centerInParent="true"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
+        android:transitionName="detailTransition"
         tools:ignore="ContentDescription" />
 
     <android.support.v7.widget.Toolbar

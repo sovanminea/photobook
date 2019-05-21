@@ -93,8 +93,8 @@ public class HomeFragment extends Fragment implements LoadImageListener, OnItemC
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-        presenter.getPhotoClicked(mPhotoListAdapter.getItem(position));
+    public void onItemClick(PhotoListAdapter.PhotoListViewHolder holder, int position) {
+        presenter.getPhotoClicked(holder, mPhotoListAdapter.getItem(position));
     }
 
     @Override
