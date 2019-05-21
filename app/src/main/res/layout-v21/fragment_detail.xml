@@ -38,13 +38,14 @@
 
             <View
                 android:id="@+id/back"
-                android:layout_width="12dp"
-                android:layout_height="20dp"
+                android:layout_width="14dp"
+                android:layout_height="24dp"
                 android:background="@drawable/ic_back_selector"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                tools:ignore="RtlHardcoded" />
 
             <View
                 android:id="@+id/bookmark"
