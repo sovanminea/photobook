@@ -24,11 +24,9 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 public class DetailFragment extends Fragment implements View.OnClickListener, DetailFragmentVP.DetailFragmentView {
 
     private PhotoModel model;
-    private View back;
     private View bookmark;
-//    private RequestOptions requestOptions = new RequestOptions();
-
-    private DetailFragmentVP.DetailFramentPresenter detailFragmentPresenter;
+    private DetailFragmentVP.DetailFragmentPresenter detailFragmentPresenter;
+    private DetailFragmentVP.OnFragmentInteractionListener onFragmentInteractionListener;
 
     public void setPhotoModel(PhotoModel model) {
         this.model = model;
@@ -57,7 +55,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
                 .into(imageView);
 
         bookmark = view.findViewById(R.id.bookmark);
-        back = view.findViewById(R.id.back);
+        View back = view.findViewById(R.id.back);
 
         bookmark.setOnClickListener(this);
         back.setOnClickListener(this);
@@ -73,6 +71,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof DetailFragmentVP.OnFragmentInteractionListener) {
+            onFragmentInteractionListener = (DetailFragmentVP.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -80,8 +84,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
         if (view.getId() == R.id.bookmark) {
             bookmark.setActivated(!bookmark.isActivated());
         } else if (view.getId() == R.id.back) {
-            assert getFragmentManager() != null;
-            getFragmentManager().popBackStack();
+            onFragmentInteractionListener.onExit();
         }
     }
 
@@ -89,4 +92,5 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
     public void onFragmentLoaded() {
 
     }
+
 }

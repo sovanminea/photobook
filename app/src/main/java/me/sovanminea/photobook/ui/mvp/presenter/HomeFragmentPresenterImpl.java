@@ -1,34 +1,35 @@
 package me.sovanminea.photobook.ui.mvp.presenter;
 
-import java.util.List;
-
-import me.sovanminea.photobook.listener.BaseResponseListener;
+import android.support.v4.app.FragmentManager;
 import me.sovanminea.photobook.model.PhotoModel;
+import me.sovanminea.photobook.ui.adapter.PhotoListAdapter;
+import me.sovanminea.photobook.ui.adapter.TabAdapter;
+import me.sovanminea.photobook.ui.mvp.FragmentNavigationVP;
 import me.sovanminea.photobook.ui.mvp.HomeFragmentVP;
 import me.sovanminea.photobook.ui.mvp.interactor.HomeFragmentInteractorImpl;
 
-public class HomeFragmentPresenterImpl implements HomeFragmentVP.HomeFragmentPresenter, BaseResponseListener<List<PhotoModel>> {
+public class HomeFragmentPresenterImpl implements HomeFragmentVP.HomeFragmentPresenter, HomeFragmentInteractorImpl.OnPagerAdapterSetup, FragmentNavigationVP.Presenter {
 
-    private HomeFragmentVP.HomeFragmentView homeFragmentView;
-    private HomeFragmentVP.HomeFragmentInteractor homeFragmentInteractor;
+    private HomeFragmentVP.HomeFragmentInteractor mHomeFragmentInteractor;
+    private HomeFragmentVP.HomeFragmentView mHomeFragmentView;
 
-    public HomeFragmentPresenterImpl(HomeFragmentVP.HomeFragmentView homeFragmentView) {
-        this.homeFragmentView = homeFragmentView;
-        this.homeFragmentInteractor = new HomeFragmentInteractorImpl(this);
+    public HomeFragmentPresenterImpl(HomeFragmentVP.HomeFragmentView homeView) {
+        mHomeFragmentView = homeView;
+        mHomeFragmentInteractor = new HomeFragmentInteractorImpl();
     }
 
     @Override
-    public void requestGetImages(int page) {
-        homeFragmentInteractor.onRequestGetImages(page);
+    public void setupPagerAdapter(FragmentManager fm) {
+        mHomeFragmentInteractor.onSetupPagerAdapter(fm, this, this);
     }
 
     @Override
-    public void onError(String message) {
-        homeFragmentView.onError(message);
+    public void onAdapterFinish(TabAdapter adapter) {
+        mHomeFragmentView.onPagerAdapterReady(adapter);
     }
 
     @Override
-    public void onSuccess(List<PhotoModel> data) {
-        homeFragmentView.onRequestGetImagesResponse(data);
+    public void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel) {
+        mHomeFragmentView.getPhotoClicked(viewHolder,photoModel);
     }
 }

@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="4dp"
     android:gravity="center">
 
     <ProgressBar
@@ -10,6 +11,6 @@
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:padding="1dp" />
+        android:padding="@dimen/x2_dimen" />
 
 </FrameLayout>

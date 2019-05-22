@@ -1,22 +1,29 @@
 package me.sovanminea.photobook.ui.mvp.interactor;
 
-import java.util.List;
+import android.support.v4.app.FragmentManager;
 
-import me.sovanminea.photobook.listener.BaseResponseListener;
-import me.sovanminea.photobook.model.PhotoModel;
-import me.sovanminea.photobook.restclient.RetrofitManager;
+import me.sovanminea.photobook.ui.adapter.TabAdapter;
+import me.sovanminea.photobook.ui.fragment.BookmarkFragment;
+import me.sovanminea.photobook.ui.fragment.PhotoFragment;
 import me.sovanminea.photobook.ui.mvp.HomeFragmentVP;
+import me.sovanminea.photobook.ui.mvp.presenter.HomeFragmentPresenterImpl;
 
-public class HomeFragmentInteractorImpl extends RequestInteractorImpl<List<PhotoModel>> implements HomeFragmentVP.HomeFragmentInteractor {
+public class HomeFragmentInteractorImpl implements HomeFragmentVP.HomeFragmentInteractor {
 
-    public HomeFragmentInteractorImpl(BaseResponseListener<List<PhotoModel>> mListener) {
-        super(mListener);
+    public interface OnPagerAdapterSetup {
+        void onAdapterFinish(TabAdapter adapter);
+    }
+
+    public HomeFragmentInteractorImpl() {
     }
 
     @Override
-    public void onRequestGetImages(int page) {
-        mCall = RetrofitManager.getApiService().getPhotoList(page);
-        mCall.enqueue(this);
+    public void onSetupPagerAdapter(FragmentManager fm, HomeFragmentPresenterImpl presenter, OnPagerAdapterSetup onPagerAdapterSetup) {
+        PhotoFragment photoFragment = new PhotoFragment();
+        photoFragment.attachPresenter(presenter);
+        TabAdapter tabAdapter = new TabAdapter(fm);
+        tabAdapter.addFragment(photoFragment, "Photos");
+        tabAdapter.addFragment(new BookmarkFragment(), "Bookmarks");
+        onPagerAdapterSetup.onAdapterFinish(tabAdapter);
     }
-
 }

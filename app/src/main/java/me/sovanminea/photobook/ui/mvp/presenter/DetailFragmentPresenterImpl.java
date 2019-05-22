@@ -2,7 +2,7 @@ package me.sovanminea.photobook.ui.mvp.presenter;
 
 import me.sovanminea.photobook.ui.mvp.DetailFragmentVP;
 
-public class DetailFragmentPresenterImpl implements DetailFragmentVP.DetailFramentPresenter {
+public class DetailFragmentPresenterImpl implements DetailFragmentVP.DetailFragmentPresenter {
 
     DetailFragmentVP.DetailFragmentView detailFragmentView;
 
