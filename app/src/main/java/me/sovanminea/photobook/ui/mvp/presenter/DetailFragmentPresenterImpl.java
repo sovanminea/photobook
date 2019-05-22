@@ -14,4 +14,5 @@ public class DetailFragmentPresenterImpl implements DetailFragmentVP.DetailFragm
     public void setFragmentLoaded() {
         detailFragmentView.onFragmentLoaded();
     }
+
 }
