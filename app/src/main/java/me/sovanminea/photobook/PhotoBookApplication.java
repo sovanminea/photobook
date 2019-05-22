@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class PhotoBookApplication extends Application {
 
     private static Application application;
@@ -14,6 +17,9 @@ public class PhotoBookApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().build();
+        Realm.setDefaultConfiguration(config);
     }
 
     @Override
