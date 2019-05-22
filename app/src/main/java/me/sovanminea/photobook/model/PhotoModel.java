@@ -3,9 +3,11 @@ package me.sovanminea.photobook.model;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class PhotoModel extends RealmObject {
 
+    @PrimaryKey
     @SerializedName("id")
     private String id;
 
@@ -24,14 +26,16 @@ public class PhotoModel extends RealmObject {
     @SerializedName("download_url")
     private String downloadUrl;
 
-//    public PhotoModel(String id, String author, int width, int height, String url, String downloadUrl) {
-//        this.id = id;
-//        this.author = author;
-//        this.width = width;
-//        this.height = height;
-//        this.url = url;
-//        this.downloadUrl = downloadUrl;
-//    }
+    public PhotoModel(){}
+
+    public PhotoModel(String id, String author, int width, int height, String url, String downloadUrl) {
+        this.id = id;
+        this.author = author;
+        this.width = width;
+        this.height = height;
+        this.url = url;
+        this.downloadUrl = downloadUrl;
+    }
 
     public String getId() {
         return id;

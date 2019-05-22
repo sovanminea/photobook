@@ -82,15 +82,11 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.bookmark) {
+            detailFragmentPresenter.createOrDeleteBookmark(!bookmark.isActivated(), model);
             bookmark.setActivated(!bookmark.isActivated());
         } else if (view.getId() == R.id.back) {
             onFragmentInteractionListener.onExit();
         }
-    }
-
-    @Override
-    public void onFragmentLoaded() {
-
     }
 
 }

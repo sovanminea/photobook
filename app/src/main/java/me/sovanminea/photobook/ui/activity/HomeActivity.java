@@ -13,7 +13,7 @@ import me.sovanminea.photobook.ui.fragment.DetailFragment;
 import me.sovanminea.photobook.ui.fragment.HomeFragment;
 import me.sovanminea.photobook.ui.mvp.DetailFragmentVP;
 
-public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFragmentInteractionListener, DetailFragmentVP.DetailFragmentPresenter, DetailFragmentVP.OnFragmentInteractionListener {
+public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFragmentInteractionListener, DetailFragmentVP.OnFragmentInteractionListener {
 
     private FragmentManager fragmentManager;
     private DetailFragment detailFragment;
@@ -49,12 +49,8 @@ public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFra
     }
 
     @Override
-    public void setFragmentLoaded() {
-
-    }
-
-    @Override
     public void onExit() {
         fragmentManager.popBackStack();
     }
+
 }
