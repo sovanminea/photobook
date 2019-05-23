@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
 
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected RecyclerView recyclerView;
+    protected TextView messageTextView;
 
     protected PhotoListAdapter mPhotoListAdapter;
     protected List<PhotoModel> mItemList = new ArrayList<>();
@@ -51,6 +53,14 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
         page = 1;
     }
 
+    public void showErrorMessage() {
+        messageTextView.setVisibility(View.VISIBLE);
+    }
+
+    public void hideErrorMessage() {
+        messageTextView.setVisibility(View.GONE);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,6 +73,7 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
 
         swipeRefreshLayout = view.findViewById(R.id.swp);
         recyclerView = view.findViewById(R.id.photo_list);
+        messageTextView = view.findViewById(R.id.message);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
         swipeRefreshLayout.setEnabled(false);

@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/photo_list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingStart="5dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="10dp"
-        android:splitMotionEvents="false" />
+        android:layout_height="match_parent">
 
-</android.support.v4.widget.SwipeRefreshLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/photo_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="10dp"
+            android:splitMotionEvents="false" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/network_error"
+        android:textAppearance="@style/Base.DialogWindowTitle.AppCompat"
+        android:textSize="14sp"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
 

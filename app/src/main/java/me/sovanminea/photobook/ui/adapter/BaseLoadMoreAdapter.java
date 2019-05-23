@@ -14,6 +14,7 @@ import java.util.List;
 import me.sovanminea.photobook.Config;
 import me.sovanminea.photobook.R;
 import me.sovanminea.photobook.listener.LoadImageListener;
+import me.sovanminea.photobook.util.NetworkUtil;
 
 public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -104,11 +105,6 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
         return dataItems == null ? 0 : dataItems.size();
     }
 
-    public void updateItem(int position, T item) {
-        dataItems.set(position,item);
-        notifyItemChanged(position);
-    }
-
     public void addItems(final List<T> dataItem) {
         removeBottomPb();
         isAll = dataItem.size() < Config.QUERY_LIMIT;
@@ -127,7 +123,6 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
     public void enableLoadingBottom() {
-        Log.d("loading", "" + loading);
         if (getItemCount() != 0 && !loading) {
             dataItems.add(null);
             mRecyclerView.post(new Runnable() {
