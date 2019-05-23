@@ -24,8 +24,6 @@ import me.sovanminea.photobook.ui.animator.SlideInUpAnimator;
 import me.sovanminea.photobook.ui.mvp.BookmarkFragmentVP;
 import me.sovanminea.photobook.ui.mvp.FragmentNavigationVP;
 import me.sovanminea.photobook.ui.mvp.PhotoFragmentVP;
-import me.sovanminea.photobook.ui.mvp.presenter.BookmarkFragmentPresenterImpl;
-import me.sovanminea.photobook.ui.mvp.presenter.PhotoFragmentPresenterImpl;
 
 public abstract class BasePhotoListFragment extends Fragment implements LoadImageListener, OnItemClickListener, PhotoFragmentVP.PhotoFragmentView, BookmarkFragmentVP.BookmarkFragmentView {
 
@@ -47,6 +45,10 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
         recyclerView.setAdapter(mPhotoListAdapter);
         recyclerView.setItemAnimator(new SlideInUpAnimator());
         recyclerView.addItemDecoration(new ItemOffsetDecoration(10));
+    }
+
+    public void resetPage() {
+        page = 1;
     }
 
     @Nullable

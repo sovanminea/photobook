@@ -50,9 +50,6 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
         });
     }
 
-    public void updateItem(int position) {
-    }
-
     @Override
     public RecyclerView.ViewHolder setViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.photo_item, parent, false);

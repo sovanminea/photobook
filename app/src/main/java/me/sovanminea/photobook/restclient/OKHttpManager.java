@@ -3,6 +3,7 @@ package me.sovanminea.photobook.restclient;
 import android.support.annotation.NonNull;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import me.sovanminea.photobook.PhotoBookApplication;
 import me.sovanminea.photobook.util.NetworkUtil;
@@ -25,6 +26,8 @@ public class OKHttpManager {
                     .cache(new Cache(PhotoBookApplication.getInstance().getCacheDir(), 10 * 1024 * 1024)) // 10 MB
                     .addInterceptor(new RewriteRequestInterceptor())
                     .addNetworkInterceptor(new RewriteResponseCacheControlInterceptor())
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .connectTimeout(30, TimeUnit.SECONDS)
                     .build();
         }
         return sInstance;

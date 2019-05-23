@@ -25,6 +25,7 @@ public class HomeFragment extends Fragment implements HomeFragmentVP.HomeFragmen
     private HomeFragmentVP.HomeFragmentPresenter mHomeFragmentPresenter;
 
     private final int PHOTO_TAB_INDEX = 0;
+    private final int BOOKMARK_TAB_INDEX = 1;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -83,10 +84,12 @@ public class HomeFragment extends Fragment implements HomeFragmentVP.HomeFragmen
 
     public void updateCreateBookmark(int position) {
         ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateItem(position);
+        ((BookmarkFragment) ((TabAdapter) viewPager.getAdapter()).getItem(BOOKMARK_TAB_INDEX)).onDBUpdated();
     }
 
     public void updateDeleteBookmark(int position) {
         ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateItem(position);
+        ((BookmarkFragment) ((TabAdapter) viewPager.getAdapter()).getItem(BOOKMARK_TAB_INDEX)).onDBUpdated();
     }
 
     public interface OnHomeFragmentInteractionListener {

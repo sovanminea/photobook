@@ -42,6 +42,7 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
     @Override
     public void onError(String message) {
         mPhotoListAdapter.removeBottomPb();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

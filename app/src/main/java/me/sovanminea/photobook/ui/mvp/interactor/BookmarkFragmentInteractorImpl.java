@@ -46,4 +46,8 @@ public class BookmarkFragmentInteractorImpl implements BookmarkFragmentVP.Bookma
         else listener.onGetBookmarkList(photoModels);
     }
 
+    @Override
+    public void resetData() {
+        allPhotoModelList = null;
+    }
 }

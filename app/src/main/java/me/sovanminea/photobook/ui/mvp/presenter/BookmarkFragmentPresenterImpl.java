@@ -41,4 +41,10 @@ public class BookmarkFragmentPresenterImpl implements BookmarkFragmentVP.Bookmar
             }
         });
     }
+
+    @Override
+    public void getBookmarkData(boolean shouldReset) {
+        bookmarkFragmentInteractor.resetData();
+        getBookmarkData(1);
+    }
 }

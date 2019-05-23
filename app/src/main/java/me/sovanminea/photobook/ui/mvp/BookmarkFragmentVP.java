@@ -9,9 +9,12 @@ public class BookmarkFragmentVP {
 
     public interface BookmarkFragmentPresenter {
         void getBookmarkData(int page);
+
+        void getBookmarkData(boolean shouldReset);
     }
 
     public interface BookmarkFragmentInteractor {
+        void resetData();
         void getBookmarkData(int page, BookmarkOperationListener listener);
     }
 

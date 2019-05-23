@@ -19,11 +19,6 @@ public class BookmarkFragment extends BasePhotoListFragment implements BookmarkF
         bookmarkFragmentPresenter.getBookmarkData(page);
     }
 
-//    @Override
-//    public void onLoadFirst() {
-//        bookmarkFragmentPresenter.getBookmarkData(page);
-//    }
-
     @Override
     public void onLoadMore() {
         mPhotoListAdapter.enableLoadingBottom();
@@ -32,7 +27,6 @@ public class BookmarkFragment extends BasePhotoListFragment implements BookmarkF
 
     @Override
     public void onBookmarkResponse(List<PhotoModel> photoModelList) {
-        Log.d("RESPONSE", "onBookmarkResponse: " + photoModelList.toString());
         swipeRefreshLayout.setRefreshing(false);
         mPhotoListAdapter.addItems(photoModelList);
         page++;
@@ -41,5 +35,11 @@ public class BookmarkFragment extends BasePhotoListFragment implements BookmarkF
     @Override
     public void onBookmarkFail(String message) {
         mPhotoListAdapter.removeBottomPb();
+    }
+
+    public void onDBUpdated() {
+        mPhotoListAdapter.clear();
+        resetPage();
+        bookmarkFragmentPresenter.getBookmarkData(true);
     }
 }
