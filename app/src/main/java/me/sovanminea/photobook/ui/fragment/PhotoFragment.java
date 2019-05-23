@@ -57,7 +57,6 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
 
     public void updateItem(int position) {
         PhotoModel photoModel = mPhotoListAdapter.getItem(position);
-        photoModel.setBookmark(!photoModel.isBookmark());
-        mPhotoListAdapter.updateItem(position, photoModel);
+        if (photoModel.isBookmark()) photoModel.setBookmark(false);
     }
 }

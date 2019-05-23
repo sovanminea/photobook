@@ -5,6 +5,7 @@ import android.util.Log;
 import io.realm.Realm;
 import io.realm.Realm.Transaction;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import me.sovanminea.photobook.listener.BookmarkOperationListener;
 import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.mvp.DetailFragmentVP;
@@ -20,7 +21,7 @@ public class DetailFragmentInteractorImpl implements DetailFragmentVP.DetailFrag
     }
 
     private void logBookmark() {
-        final RealmResults<PhotoModel> results = realm.where(PhotoModel.class).findAll();
+        final RealmResults<PhotoModel> results = realm.where(PhotoModel.class).sort("id", Sort.ASCENDING).findAll();
         if (results.size() == 0) Log.d("Bookmark", "empty");
         else {
             for (PhotoModel photo :
@@ -32,12 +33,14 @@ public class DetailFragmentInteractorImpl implements DetailFragmentVP.DetailFrag
 
     @Override
     public void createBookmark(PhotoModel model, BookmarkOperationListener bookmarkOperationListener) {
-        model.setBookmark(true);
+        PhotoModel m = model;
+        m.setBookmark(true);
         realm.beginTransaction();
-        realm.insertOrUpdate(model);
+        realm.insertOrUpdate(m);
         realm.commitTransaction();
         logBookmark();
-        if(this.bookmarkOperationListener == null) this.bookmarkOperationListener = bookmarkOperationListener;
+        if (this.bookmarkOperationListener == null)
+            this.bookmarkOperationListener = bookmarkOperationListener;
         bookmarkOperationListener.onBookmarkCreated();
     }
 
@@ -51,7 +54,8 @@ public class DetailFragmentInteractorImpl implements DetailFragmentVP.DetailFrag
             }
         });
         logBookmark();
-        if(this.bookmarkOperationListener == null) this.bookmarkOperationListener = bookmarkOperationListener;
+        if (this.bookmarkOperationListener == null)
+            this.bookmarkOperationListener = bookmarkOperationListener;
         bookmarkOperationListener.onBookmarkDeleted();
     }
 }

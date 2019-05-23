@@ -83,7 +83,6 @@ public class HomeFragment extends Fragment implements HomeFragmentVP.HomeFragmen
     }
 
     public void updateCreateBookmark(int position) {
-        ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateItem(position);
         ((BookmarkFragment) ((TabAdapter) viewPager.getAdapter()).getItem(BOOKMARK_TAB_INDEX)).onDBUpdated();
     }
 

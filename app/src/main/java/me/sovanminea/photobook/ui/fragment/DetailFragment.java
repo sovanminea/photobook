@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
     public void setPhotoModel(PhotoModel model, int position) {
         this.model = model;
         this.position = position;
+        Log.d("DetailFragment", "setPhotoModel: " + model.toString());
     }
 
     @Nullable
@@ -104,7 +106,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
 
     @Override
     public void onBookmarkCreated() {
-        boolean shouldCreate = !model.isBookmark();
-        if (shouldCreate) onFragmentInteractionListener.onBookmarkCreated(position);
+        onFragmentInteractionListener.onBookmarkCreated(position);
     }
 }

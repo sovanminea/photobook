@@ -1,5 +1,7 @@
 package me.sovanminea.photobook.ui.mvp.presenter;
 
+import android.util.Log;
+
 import java.util.List;
 
 import me.sovanminea.photobook.listener.BookmarkOperationListener;
@@ -31,6 +33,7 @@ public class DetailFragmentPresenterImpl implements DetailFragmentVP.DetailFragm
 
     @Override
     public void onBookmarkCreated() {
+        Log.d("Detail", "onBookmarkCreated: ");
         detailFragmentView.onBookmarkCreated();
     }
 

@@ -6,6 +6,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import me.sovanminea.photobook.listener.BookmarkOperationListener;
 import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.mvp.BookmarkFragmentVP;
@@ -35,6 +36,7 @@ public class BookmarkFragmentInteractorImpl implements BookmarkFragmentVP.Bookma
         if (allPhotoModelList == null) {
             RealmResults<PhotoModel> realmResults = realm.where(PhotoModel.class)
                     .equalTo("bookmark", true)
+                    .sort("id", Sort.ASCENDING)
                     .findAll();
             if (realmResults.size() == 0) listener.onGetBookmarkFailed("not found");
             else {
