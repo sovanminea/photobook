@@ -4,4 +4,5 @@
     <dimen name="thumbnail_height">112dp</dimen>
     <dimen name="x2_dimen">2dp</dimen>
     <dimen name="x3_dimen">3dp</dimen>
+    <dimen name="x5_dimen">5dp</dimen>
 </resources>

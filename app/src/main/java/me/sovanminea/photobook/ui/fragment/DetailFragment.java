@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -64,6 +65,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
         back.setOnClickListener(this);
 
         detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
+
+        ((TextView) view.findViewById(R.id.author)).setText(model.getAuthor());
+        ((TextView) view.findViewById(R.id.size)).setText(getString(R.string.size_value, model.getWidth(), model.getHeight()));
     }
 
     @Override

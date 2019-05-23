@@ -18,6 +18,45 @@
         android:transitionName="detailTransition"
         tools:ignore="ContentDescription" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x2_dimen"
+            android:text="@string/author"
+            android:textColor="@android:color/secondary_text_dark" />
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x2_dimen"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x5_dimen"
+            android:layout_marginLeft="@dimen/x5_dimen"
+            android:padding="@dimen/x2_dimen"
+            android:text="@string/size"
+            android:textColor="@android:color/secondary_text_dark"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x2_dimen"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
