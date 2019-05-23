@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +25,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
 
     private PhotoModel model;
     private int position;
-    private boolean shouldDelete = false;
-    private boolean shouldCreate = false;
     private View bookmark;
     private DetailFragmentVP.DetailFragmentPresenter detailFragmentPresenter;
     private DetailFragmentVP.OnFragmentInteractionListener onFragmentInteractionListener;
@@ -67,7 +64,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
         back.setOnClickListener(this);
 
         detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
-        Log.d("DETAIL", model.toString());
     }
 
     @Override
@@ -98,13 +94,13 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
 
     @Override
     public void onBookmarkDeleted() {
-        shouldDelete = model.isBookmark();
+        boolean shouldDelete = model.isBookmark();
         if (shouldDelete) onFragmentInteractionListener.onBookmarkDeleted(position);
     }
 
     @Override
     public void onBookmarkCreated() {
-        shouldCreate = !model.isBookmark();
+        boolean shouldCreate = !model.isBookmark();
         if (shouldCreate) onFragmentInteractionListener.onBookmarkCreated(position);
     }
 }

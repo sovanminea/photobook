@@ -18,8 +18,6 @@ public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFra
     private FragmentManager fragmentManager;
     private DetailFragment detailFragment;
 
-    private int selectedPosition;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +34,6 @@ public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFra
         if (detailFragment == null)
             detailFragment = new DetailFragment();
         detailFragment.setPhotoModel(model, position);
-        selectedPosition = position;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             detailFragment.setSharedElementEnterTransition(new DetailTransition());

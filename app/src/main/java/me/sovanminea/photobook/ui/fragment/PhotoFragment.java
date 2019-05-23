@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,12 +70,6 @@ public class PhotoFragment extends Fragment implements LoadImageListener, OnItem
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("RESUME", "onResume: ");
-    }
-
-    @Override
     public void onLoadFirst() {
         photoFragmentPresenter.requestGetImages(page);
     }
@@ -96,7 +89,7 @@ public class PhotoFragment extends Fragment implements LoadImageListener, OnItem
 
     @Override
     public void onError(String message) {
-
+        mPhotoListAdapter.removeBottomPb();
     }
 
     @Override
