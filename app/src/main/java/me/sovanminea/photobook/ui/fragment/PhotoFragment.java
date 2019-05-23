@@ -8,12 +8,22 @@ import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.adapter.PhotoListAdapter;
 import me.sovanminea.photobook.ui.mvp.FragmentNavigationVP;
 import me.sovanminea.photobook.ui.mvp.PhotoFragmentVP;
+import me.sovanminea.photobook.ui.mvp.presenter.PhotoFragmentPresenterImpl;
 
 public class PhotoFragment extends BasePhotoListFragment implements LoadImageListener, OnItemClickListener, PhotoFragmentVP.PhotoFragmentView, FragmentNavigationVP.View {
 
+    private PhotoFragmentVP.PhotoFragmentPresenter photoFragmentPresenter;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        photoFragmentPresenter = new PhotoFragmentPresenterImpl(this);
+        photoFragmentPresenter.requestGetImages(page);
+    }
+
     @Override
     public void onLoadFirst() {
-        photoFragmentPresenter.requestGetImages(page);
+//        photoFragmentPresenter.requestGetImages(page);
     }
 
     @Override

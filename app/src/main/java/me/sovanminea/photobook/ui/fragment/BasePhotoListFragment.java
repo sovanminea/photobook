@@ -37,7 +37,6 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
 
     protected int page = 1;
 
-    protected PhotoFragmentVP.PhotoFragmentPresenter photoFragmentPresenter;
     protected FragmentNavigationVP.Presenter presenter;
 
     public void setupRecycler(View v) {
@@ -59,8 +58,6 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        photoFragmentPresenter = new PhotoFragmentPresenterImpl(this);
 
         swipeRefreshLayout = view.findViewById(R.id.swp);
         recyclerView = view.findViewById(R.id.photo_list);

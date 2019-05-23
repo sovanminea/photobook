@@ -19,10 +19,10 @@ public class BookmarkFragment extends BasePhotoListFragment implements BookmarkF
         bookmarkFragmentPresenter.getBookmarkData(page);
     }
 
-    @Override
-    public void onLoadFirst() {
+//    @Override
+//    public void onLoadFirst() {
 //        bookmarkFragmentPresenter.getBookmarkData(page);
-    }
+//    }
 
     @Override
     public void onLoadMore() {
