@@ -1,21 +1,45 @@
 package me.sovanminea.photobook.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 
-import me.sovanminea.photobook.R;
+import java.util.List;
 
-public class BookmarkFragment extends Fragment {
+import me.sovanminea.photobook.model.PhotoModel;
+import me.sovanminea.photobook.ui.mvp.BookmarkFragmentVP;
+import me.sovanminea.photobook.ui.mvp.presenter.BookmarkFragmentPresenterImpl;
 
-    @Nullable
+public class BookmarkFragment extends BasePhotoListFragment implements BookmarkFragmentVP.BookmarkFragmentView {
+
+    private BookmarkFragmentVP.BookmarkFragmentPresenter bookmarkFragmentPresenter;
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_bookmark, container, false);
+    public void onResume() {
+        super.onResume();
+        bookmarkFragmentPresenter = new BookmarkFragmentPresenterImpl(this);
+        bookmarkFragmentPresenter.getBookmarkData(page);
     }
 
+    @Override
+    public void onLoadFirst() {
+//        bookmarkFragmentPresenter.getBookmarkData(page);
+    }
+
+    @Override
+    public void onLoadMore() {
+        mPhotoListAdapter.enableLoadingBottom();
+        bookmarkFragmentPresenter.getBookmarkData(page);
+    }
+
+    @Override
+    public void onBookmarkResponse(List<PhotoModel> photoModelList) {
+        Log.d("RESPONSE", "onBookmarkResponse: " + photoModelList.toString());
+        swipeRefreshLayout.setRefreshing(false);
+        mPhotoListAdapter.addItems(photoModelList);
+        page++;
+    }
+
+    @Override
+    public void onBookmarkFail(String message) {
+        mPhotoListAdapter.removeBottomPb();
+    }
 }

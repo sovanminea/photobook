@@ -1,5 +1,7 @@
 package me.sovanminea.photobook.ui.mvp.presenter;
 
+import java.util.List;
+
 import me.sovanminea.photobook.listener.BookmarkOperationListener;
 import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.mvp.DetailFragmentVP;
@@ -30,5 +32,15 @@ public class DetailFragmentPresenterImpl implements DetailFragmentVP.DetailFragm
     @Override
     public void onBookmarkCreated() {
         detailFragmentView.onBookmarkCreated();
+    }
+
+    @Override
+    public void onGetBookmarkList(List<PhotoModel> photoModelList) {
+
+    }
+
+    @Override
+    public void onGetBookmarkFailed(String message) {
+
     }
 }
