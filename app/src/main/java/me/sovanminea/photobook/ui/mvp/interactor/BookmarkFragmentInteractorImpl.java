@@ -25,7 +25,8 @@ public class BookmarkFragmentInteractorImpl implements BookmarkFragmentVP.Bookma
     private List<PhotoModel> getListWithPage(int page) {
         int start = (page - 1) * LIMIT;
         int end = page * LIMIT;
-        if (allPhotoModelList.size() < start) return null;
+
+        if (allPhotoModelList == null || allPhotoModelList.size() < start) return null;
         else if (allPhotoModelList.size() < end) {
             return allPhotoModelList.subList(start, allPhotoModelList.size());
         } else return allPhotoModelList.subList(start, end);

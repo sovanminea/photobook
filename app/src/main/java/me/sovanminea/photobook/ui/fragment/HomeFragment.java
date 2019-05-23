@@ -82,16 +82,31 @@ public class HomeFragment extends Fragment implements HomeFragmentVP.HomeFragmen
         mListener.onPhotoClicked(viewHolder, model, position);
     }
 
-    public void updateCreateBookmark(int position) {
-        ((BookmarkFragment) ((TabAdapter) viewPager.getAdapter()).getItem(BOOKMARK_TAB_INDEX)).onDBUpdated();
+    @Override
+    public void getBookmarkClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model) {
+        mListener.onBookmarkClicked(viewHolder, model);
     }
 
-    public void updateDeleteBookmark(int position) {
-        ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateItem(position);
+    public void updateCreateBookmark(String id, boolean fromBookmark) {
+        Log.d("CREATE BOOKMARK", id + " " + fromBookmark);
+//        if (fromBookmark)
+            ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateCreateBookmarkItem(id);
+        ((BookmarkFragment) ((TabAdapter) viewPager.getAdapter()).getItem(BOOKMARK_TAB_INDEX)).onDBUpdated();
+
+    }
+
+    public void updateDeleteBookmark(int position, String id) {
+        if (id == null) {
+            ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateItem(position);
+        } else {
+            ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateDeleteBookmarkItem(id);
+        }
         ((BookmarkFragment) ((TabAdapter) viewPager.getAdapter()).getItem(BOOKMARK_TAB_INDEX)).onDBUpdated();
     }
 
     public interface OnHomeFragmentInteractionListener {
         void onPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model, int position);
+
+        void onBookmarkClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model);
     }
 }

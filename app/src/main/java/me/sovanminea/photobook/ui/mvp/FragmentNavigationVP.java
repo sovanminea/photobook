@@ -12,6 +12,7 @@ public class FragmentNavigationVP {
 
     public interface Presenter {
         void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel, int position);
+        void getBookmarkClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel);
     }
 
 }

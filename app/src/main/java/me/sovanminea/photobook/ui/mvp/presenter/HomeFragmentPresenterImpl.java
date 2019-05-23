@@ -33,4 +33,9 @@ public class HomeFragmentPresenterImpl implements HomeFragmentVP.HomeFragmentPre
     public void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel, int position) {
         mHomeFragmentView.getPhotoClicked(viewHolder, photoModel, position);
     }
+
+    @Override
+    public void getBookmarkClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel) {
+        mHomeFragmentView.getBookmarkClicked(viewHolder, photoModel);
+    }
 }

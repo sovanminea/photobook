@@ -5,12 +5,19 @@ import android.util.Log;
 import java.util.List;
 
 import me.sovanminea.photobook.model.PhotoModel;
+import me.sovanminea.photobook.ui.adapter.PhotoListAdapter;
 import me.sovanminea.photobook.ui.mvp.BookmarkFragmentVP;
 import me.sovanminea.photobook.ui.mvp.presenter.BookmarkFragmentPresenterImpl;
 
 public class BookmarkFragment extends BasePhotoListFragment implements BookmarkFragmentVP.BookmarkFragmentView {
 
     private BookmarkFragmentVP.BookmarkFragmentPresenter bookmarkFragmentPresenter;
+
+    public void onDBUpdated() {
+        mPhotoListAdapter.clear();
+        resetPage();
+        bookmarkFragmentPresenter.getBookmarkData(true);
+    }
 
     @Override
     public void onResume() {
@@ -37,9 +44,9 @@ public class BookmarkFragment extends BasePhotoListFragment implements BookmarkF
         mPhotoListAdapter.removeBottomPb();
     }
 
-    public void onDBUpdated() {
-        mPhotoListAdapter.clear();
-        resetPage();
-        bookmarkFragmentPresenter.getBookmarkData(true);
+    @Override
+    public void onItemClick(PhotoListAdapter.PhotoListViewHolder view, int position) {
+        super.onItemClick(view, position);
+        presenter.getBookmarkClicked(view, mPhotoListAdapter.getItem(position));
     }
 }

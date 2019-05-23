@@ -1,5 +1,7 @@
 package me.sovanminea.photobook.ui.fragment;
 
+import android.util.Log;
+
 import java.util.List;
 
 import me.sovanminea.photobook.listener.LoadImageListener;
@@ -13,6 +15,22 @@ import me.sovanminea.photobook.ui.mvp.presenter.PhotoFragmentPresenterImpl;
 public class PhotoFragment extends BasePhotoListFragment implements LoadImageListener, OnItemClickListener, PhotoFragmentVP.PhotoFragmentView, FragmentNavigationVP.View {
 
     private PhotoFragmentVP.PhotoFragmentPresenter photoFragmentPresenter;
+
+    public void updateItem(int position) {
+        PhotoModel photoModel = mPhotoListAdapter.getItem(position);
+        if (photoModel.isBookmark()) photoModel.setBookmark(false);
+    }
+
+    public void updateCreateBookmarkItem(String id) {
+        PhotoModel photoModel = mPhotoListAdapter.getItemById(id);
+        photoModel.setBookmark(true);
+    }
+
+    public void updateDeleteBookmarkItem(String id) {
+        PhotoModel photoModel = mPhotoListAdapter.getItemById(id);
+        Log.d("ddd", "updateDeleteBookmarkItem: " + photoModel.toString());
+        photoModel.setBookmark(false);
+    }
 
     @Override
     public void onResume() {
@@ -51,13 +69,4 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
         presenter.getPhotoClicked(holder, mPhotoListAdapter.getItem(position), position);
     }
 
-    @Override
-    public void attachPresenter(FragmentNavigationVP.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    public void updateItem(int position) {
-        PhotoModel photoModel = mPhotoListAdapter.getItem(position);
-        if (photoModel.isBookmark()) photoModel.setBookmark(false);
-    }
 }

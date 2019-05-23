@@ -20,7 +20,7 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
 
     private static final int VIEW_ITEM = 1;
     protected static final int VIEW_PROG = 0;
-    private List<T> dataItems;
+    protected List<T> dataItems;
     private LoadImageListener mLoadImageListener;
     private RecyclerView mRecyclerView;
     private int totalItemCount;

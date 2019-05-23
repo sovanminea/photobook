@@ -24,9 +24,9 @@ public class DetailFragmentVP {
     public interface OnFragmentInteractionListener {
         void onExit();
 
-        void onBookmarkDeleted(int position);
+        void onBookmarkDeleted(int position, boolean fromBookmark, String id);
 
-        void onBookmarkCreated(int position);
+        void onBookmarkCreated(String id, boolean fromBookmark);
     }
 
 }

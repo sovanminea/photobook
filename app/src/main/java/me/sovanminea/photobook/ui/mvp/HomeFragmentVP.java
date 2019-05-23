@@ -21,5 +21,6 @@ public class HomeFragmentVP {
     public interface HomeFragmentView {
         void onPagerAdapterReady(TabAdapter tabAdapter);
         void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model, int position);
+        void getBookmarkClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model);
     }
 }

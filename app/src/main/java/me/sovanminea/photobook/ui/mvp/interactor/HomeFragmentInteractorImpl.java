@@ -20,10 +20,12 @@ public class HomeFragmentInteractorImpl implements HomeFragmentVP.HomeFragmentIn
     @Override
     public void onSetupPagerAdapter(FragmentManager fm, HomeFragmentPresenterImpl presenter, OnPagerAdapterSetup onPagerAdapterSetup) {
         PhotoFragment photoFragment = new PhotoFragment();
+        BookmarkFragment bookmarkFragment = new BookmarkFragment();
         photoFragment.attachPresenter(presenter);
+        bookmarkFragment.attachPresenter(presenter);
         TabAdapter tabAdapter = new TabAdapter(fm);
         tabAdapter.addFragment(photoFragment, "Photos");
-        tabAdapter.addFragment(new BookmarkFragment(), "Bookmarks");
+        tabAdapter.addFragment(bookmarkFragment, "Bookmarks");
         onPagerAdapterSetup.onAdapterFinish(tabAdapter);
     }
 }

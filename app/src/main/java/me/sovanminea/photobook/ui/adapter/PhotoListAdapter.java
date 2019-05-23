@@ -74,6 +74,17 @@ public class PhotoListAdapter extends BaseLoadMoreAdapter<PhotoModel, PhotoListA
         });
     }
 
+    public PhotoModel getItemById(String id) {
+        PhotoModel model = null;
+        for (int i = 0; i < dataItems.size(); i++) {
+            if (dataItems.get(i).getId().equals(id)) {
+                model = dataItems.get(i);
+                break;
+            }
+        }
+        return model;
+    }
+
     public class PhotoListViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;

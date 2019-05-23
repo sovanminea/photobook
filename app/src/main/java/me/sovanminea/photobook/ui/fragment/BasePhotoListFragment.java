@@ -26,7 +26,7 @@ import me.sovanminea.photobook.ui.mvp.BookmarkFragmentVP;
 import me.sovanminea.photobook.ui.mvp.FragmentNavigationVP;
 import me.sovanminea.photobook.ui.mvp.PhotoFragmentVP;
 
-public abstract class BasePhotoListFragment extends Fragment implements LoadImageListener, OnItemClickListener, PhotoFragmentVP.PhotoFragmentView, BookmarkFragmentVP.BookmarkFragmentView {
+public abstract class BasePhotoListFragment extends Fragment implements LoadImageListener, OnItemClickListener, PhotoFragmentVP.PhotoFragmentView, BookmarkFragmentVP.BookmarkFragmentView, FragmentNavigationVP.View {
 
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected RecyclerView recyclerView;
@@ -79,6 +79,11 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(true);
         setupRecycler(view);
+    }
+
+    @Override
+    public void attachPresenter(FragmentNavigationVP.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override

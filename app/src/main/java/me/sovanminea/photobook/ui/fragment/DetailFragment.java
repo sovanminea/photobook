@@ -27,14 +27,16 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
 
     private PhotoModel model;
     private int position;
+    private boolean fromBookmark;
     private View bookmark;
     private DetailFragmentVP.DetailFragmentPresenter detailFragmentPresenter;
     private DetailFragmentVP.OnFragmentInteractionListener onFragmentInteractionListener;
 
-    public void setPhotoModel(PhotoModel model, int position) {
-        this.model = model;
+    public void setPhotoModel(PhotoModel model, int position, boolean fromBookmark) {
+        this.model = new PhotoModel(model.getId(), model.getAuthor(), model.getWidth(), model.getHeight(), model.getUrl(), model.getDownloadUrl(), model.isBookmark());
         this.position = position;
-        Log.d("DetailFragment", "setPhotoModel: " + model.toString());
+        this.fromBookmark = fromBookmark;
+        Log.d("KLDsj", "setPhotoModel: " + model.toString() + fromBookmark);
     }
 
     @Nullable
@@ -100,12 +102,16 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
 
     @Override
     public void onBookmarkDeleted() {
-        boolean shouldDelete = model.isBookmark();
-        if (shouldDelete) onFragmentInteractionListener.onBookmarkDeleted(position);
+        boolean shouldDelete = model != null && model.isBookmark();
+        if (shouldDelete && !fromBookmark)
+            onFragmentInteractionListener.onBookmarkDeleted(position, false, null);
+
+        if (fromBookmark)
+            onFragmentInteractionListener.onBookmarkDeleted(position, true, model.getId());
     }
 
     @Override
     public void onBookmarkCreated() {
-        onFragmentInteractionListener.onBookmarkCreated(position);
+        onFragmentInteractionListener.onBookmarkCreated(model.getId(), fromBookmark);
     }
 }
