@@ -18,19 +18,25 @@ public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFra
     private FragmentManager fragmentManager;
     private DetailFragment detailFragment;
 
+    private int selectedPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.frame_layout, new HomeFragment(), "HomeFragment")
+//                .addToBackStack("HomeFragment")
+                .commit();
     }
 
     @Override
-    public void onPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model) {
+    public void onPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model, int position) {
         if (detailFragment == null)
             detailFragment = new DetailFragment();
-        detailFragment.setPhotoModel(model);
+        detailFragment.setPhotoModel(model, position);
+        selectedPosition = position;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             detailFragment.setSharedElementEnterTransition(new DetailTransition());
@@ -53,4 +59,17 @@ public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFra
         fragmentManager.popBackStack();
     }
 
+    @Override
+    public void onBookmarkDeleted(int position) {
+        HomeFragment f = (HomeFragment) fragmentManager.findFragmentByTag("HomeFragment");
+        assert f != null;
+        f.updateDeleteBookmark(position);
+    }
+
+    @Override
+    public void onBookmarkCreated(int position) {
+        HomeFragment f = (HomeFragment) fragmentManager.findFragmentByTag("HomeFragment");
+        assert f != null;
+        f.updateCreateBookmark(position);
+    }
 }

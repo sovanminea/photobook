@@ -104,6 +104,11 @@ public abstract class BaseLoadMoreAdapter<T, VH extends RecyclerView.ViewHolder>
         return dataItems == null ? 0 : dataItems.size();
     }
 
+    public void updateItem(int position, T item) {
+        dataItems.set(position,item);
+        notifyItemChanged(position);
+    }
+
     public void addItems(final List<T> dataItem) {
         removeBottomPb();
         isAll = dataItem.size() < Config.QUERY_LIMIT;

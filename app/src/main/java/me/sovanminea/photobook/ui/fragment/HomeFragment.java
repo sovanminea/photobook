@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import me.sovanminea.photobook.ui.mvp.presenter.HomeFragmentPresenterImpl;
 public class HomeFragment extends Fragment implements HomeFragmentVP.HomeFragmentView {
     private OnHomeFragmentInteractionListener mListener;
     private HomeFragmentVP.HomeFragmentPresenter mHomeFragmentPresenter;
+
+    private final int PHOTO_TAB_INDEX = 0;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -74,11 +77,19 @@ public class HomeFragment extends Fragment implements HomeFragmentVP.HomeFragmen
     }
 
     @Override
-    public void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model) {
-        mListener.onPhotoClicked(viewHolder, model);
+    public void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model, int position) {
+        mListener.onPhotoClicked(viewHolder, model, position);
+    }
+
+    public void updateCreateBookmark(int position) {
+        ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateItem(position);
+    }
+
+    public void updateDeleteBookmark(int position) {
+        ((PhotoFragment) ((TabAdapter) viewPager.getAdapter()).getItem(PHOTO_TAB_INDEX)).updateItem(position);
     }
 
     public interface OnHomeFragmentInteractionListener {
-        void onPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model);
+        void onPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel model, int position);
     }
 }

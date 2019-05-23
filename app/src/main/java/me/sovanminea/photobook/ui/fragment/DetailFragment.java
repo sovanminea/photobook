@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,16 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 public class DetailFragment extends Fragment implements View.OnClickListener, DetailFragmentVP.DetailFragmentView {
 
     private PhotoModel model;
+    private int position;
+    private boolean shouldDelete = false;
+    private boolean shouldCreate = false;
     private View bookmark;
     private DetailFragmentVP.DetailFragmentPresenter detailFragmentPresenter;
     private DetailFragmentVP.OnFragmentInteractionListener onFragmentInteractionListener;
 
-    public void setPhotoModel(PhotoModel model) {
+    public void setPhotoModel(PhotoModel model, int position) {
         this.model = model;
+        this.position = position;
     }
 
     @Nullable
@@ -57,10 +62,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
         bookmark = view.findViewById(R.id.bookmark);
         View back = view.findViewById(R.id.back);
 
+        bookmark.setActivated(model.isBookmark());
         bookmark.setOnClickListener(this);
         back.setOnClickListener(this);
 
         detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
+        Log.d("DETAIL", model.toString());
     }
 
     @Override
@@ -89,4 +96,15 @@ public class DetailFragment extends Fragment implements View.OnClickListener, De
         }
     }
 
+    @Override
+    public void onBookmarkDeleted() {
+        shouldDelete = model.isBookmark();
+        if (shouldDelete) onFragmentInteractionListener.onBookmarkDeleted(position);
+    }
+
+    @Override
+    public void onBookmarkCreated() {
+        shouldCreate = !model.isBookmark();
+        if (shouldCreate) onFragmentInteractionListener.onBookmarkCreated(position);
+    }
 }

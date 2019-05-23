@@ -1,6 +1,7 @@
 package me.sovanminea.photobook.ui.mvp.presenter;
 
 import android.support.v4.app.FragmentManager;
+
 import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.adapter.PhotoListAdapter;
 import me.sovanminea.photobook.ui.adapter.TabAdapter;
@@ -29,7 +30,7 @@ public class HomeFragmentPresenterImpl implements HomeFragmentVP.HomeFragmentPre
     }
 
     @Override
-    public void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel) {
-        mHomeFragmentView.getPhotoClicked(viewHolder,photoModel);
+    public void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel, int position) {
+        mHomeFragmentView.getPhotoClicked(viewHolder, photoModel, position);
     }
 }

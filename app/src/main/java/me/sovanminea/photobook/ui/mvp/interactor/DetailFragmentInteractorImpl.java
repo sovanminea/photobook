@@ -5,6 +5,7 @@ import android.util.Log;
 import io.realm.Realm;
 import io.realm.Realm.Transaction;
 import io.realm.RealmResults;
+import me.sovanminea.photobook.listener.BookmarkOperationListener;
 import me.sovanminea.photobook.model.PhotoModel;
 import me.sovanminea.photobook.ui.mvp.DetailFragmentVP;
 
@@ -12,6 +13,7 @@ public class DetailFragmentInteractorImpl implements DetailFragmentVP.DetailFrag
 
     private Realm realm;
     private PhotoModel bookmark;
+    private BookmarkOperationListener bookmarkOperationListener;
 
     public DetailFragmentInteractorImpl() {
         realm = Realm.getDefaultInstance();
@@ -29,15 +31,18 @@ public class DetailFragmentInteractorImpl implements DetailFragmentVP.DetailFrag
     }
 
     @Override
-    public void createBookmark(PhotoModel model) {
+    public void createBookmark(PhotoModel model, BookmarkOperationListener bookmarkOperationListener) {
+        model.setBookmark(true);
         realm.beginTransaction();
         realm.insertOrUpdate(model);
         realm.commitTransaction();
         logBookmark();
+        if(this.bookmarkOperationListener == null) this.bookmarkOperationListener = bookmarkOperationListener;
+        bookmarkOperationListener.onBookmarkCreated();
     }
 
     @Override
-    public void deleteBookmark(PhotoModel model) {
+    public void deleteBookmark(PhotoModel model, BookmarkOperationListener bookmarkOperationListener) {
         bookmark = realm.where(PhotoModel.class).equalTo("id", model.getId()).findFirst();
         realm.executeTransaction(new Transaction() {
             @Override
@@ -46,5 +51,7 @@ public class DetailFragmentInteractorImpl implements DetailFragmentVP.DetailFrag
             }
         });
         logBookmark();
+        if(this.bookmarkOperationListener == null) this.bookmarkOperationListener = bookmarkOperationListener;
+        bookmarkOperationListener.onBookmarkDeleted();
     }
 }

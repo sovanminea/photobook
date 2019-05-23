@@ -26,15 +26,19 @@ public class PhotoModel extends RealmObject {
     @SerializedName("download_url")
     private String downloadUrl;
 
-    public PhotoModel(){}
+    private boolean bookmark = false;
 
-    public PhotoModel(String id, String author, int width, int height, String url, String downloadUrl) {
+    public PhotoModel() {
+    }
+
+    public PhotoModel(String id, String author, int width, int height, String url, String downloadUrl, boolean bookmark) {
         this.id = id;
         this.author = author;
         this.width = width;
         this.height = height;
         this.url = url;
         this.downloadUrl = downloadUrl;
+        this.bookmark = bookmark;
     }
 
     public String getId() {
@@ -85,6 +89,14 @@ public class PhotoModel extends RealmObject {
         this.downloadUrl = downloadUrl;
     }
 
+    public boolean isBookmark() {
+        return bookmark;
+    }
+
+    public void setBookmark(boolean bookmark) {
+        this.bookmark = bookmark;
+    }
+
     @Override
     public String toString() {
         return "PhotoModel{" +
@@ -94,6 +106,7 @@ public class PhotoModel extends RealmObject {
                 ", height=" + height +
                 ", url='" + url + '\'' +
                 ", downloadUrl='" + downloadUrl + '\'' +
+                ", bookmark=" + bookmark + "" +
                 '}';
     }
 }

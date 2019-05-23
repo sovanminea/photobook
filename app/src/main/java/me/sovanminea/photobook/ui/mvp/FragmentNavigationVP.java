@@ -11,7 +11,7 @@ public class FragmentNavigationVP {
     }
 
     public interface Presenter {
-        void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel);
+        void getPhotoClicked(PhotoListAdapter.PhotoListViewHolder viewHolder, PhotoModel photoModel, int position);
     }
 
 }
