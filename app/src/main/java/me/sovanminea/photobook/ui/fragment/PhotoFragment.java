@@ -41,17 +41,19 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
 
     @Override
     public void onLoadFirst() {
-//        photoFragmentPresenter.requestGetImages(page);
+        super.onLoadFirst();
     }
 
     @Override
     public void onLoadMore() {
+        super.onLoadMore();
         mPhotoListAdapter.enableLoadingBottom();
         photoFragmentPresenter.requestGetImages(page);
     }
 
     @Override
     public void onRequestGetImagesResponse(List<PhotoModel> photoModelList) {
+        super.onRequestGetImagesResponse(photoModelList);
         swipeRefreshLayout.setRefreshing(false);
         mPhotoListAdapter.addItems(photoModelList);
         page++;
@@ -61,7 +63,8 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
     public void onError(String message) {
         mPhotoListAdapter.removeBottomPb();
         swipeRefreshLayout.setRefreshing(false);
-        if (mPhotoListAdapter.getItemCount() == 0) showErrorMessage();
+        if (mPhotoListAdapter.getItemCount() == 0)
+            showErrorMessage("Not found, please check your network connection.");
     }
 
     @Override

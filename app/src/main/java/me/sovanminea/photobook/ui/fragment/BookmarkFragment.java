@@ -28,12 +28,14 @@ public class BookmarkFragment extends BasePhotoListFragment implements BookmarkF
 
     @Override
     public void onLoadMore() {
+        super.onLoadMore();
         mPhotoListAdapter.enableLoadingBottom();
         bookmarkFragmentPresenter.getBookmarkData(page);
     }
 
     @Override
     public void onBookmarkResponse(List<PhotoModel> photoModelList) {
+        super.onBookmarkResponse(photoModelList);
         swipeRefreshLayout.setRefreshing(false);
         mPhotoListAdapter.addItems(photoModelList);
         page++;
@@ -42,6 +44,8 @@ public class BookmarkFragment extends BasePhotoListFragment implements BookmarkF
     @Override
     public void onBookmarkFail(String message) {
         mPhotoListAdapter.removeBottomPb();
+        swipeRefreshLayout.setRefreshing(false);
+        if (mPhotoListAdapter.getItemCount() == 0) showErrorMessage("No Bookmarks!");
     }
 
     @Override

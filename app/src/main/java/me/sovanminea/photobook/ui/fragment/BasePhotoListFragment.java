@@ -53,7 +53,8 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
         page = 1;
     }
 
-    public void showErrorMessage() {
+    public void showErrorMessage(String s) {
+        messageTextView.setText(s);
         messageTextView.setVisibility(View.VISIBLE);
     }
 
@@ -88,12 +89,12 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
 
     @Override
     public void onLoadMore() {
-
+        hideErrorMessage();
     }
 
     @Override
     public void onLoadFirst() {
-
+        hideErrorMessage();
     }
 
     @Override
@@ -103,7 +104,7 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
 
     @Override
     public void onRequestGetImagesResponse(List<PhotoModel> photoModelList) {
-
+        hideErrorMessage();
     }
 
     @Override
@@ -113,7 +114,7 @@ public abstract class BasePhotoListFragment extends Fragment implements LoadImag
 
     @Override
     public void onBookmarkResponse(List<PhotoModel> photoModelList) {
-
+        hideErrorMessage();
     }
 
     @Override
