@@ -1,9 +1,10 @@
 package me.sovanminea.photobook.ui.fragment;
 
-import android.util.Log;
+import android.view.View;
 
 import java.util.List;
 
+import me.sovanminea.photobook.R;
 import me.sovanminea.photobook.listener.LoadImageListener;
 import me.sovanminea.photobook.listener.OnItemClickListener;
 import me.sovanminea.photobook.model.PhotoModel;
@@ -63,7 +64,7 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
         mPhotoListAdapter.removeBottomPb();
         swipeRefreshLayout.setRefreshing(false);
         if (mPhotoListAdapter.getItemCount() == 0)
-            showErrorMessage("Not found, please check your network connection.");
+            showErrorMessage("Network disconnected, try again.");
     }
 
     @Override
@@ -71,4 +72,14 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
         presenter.getPhotoClicked(holder, mPhotoListAdapter.getItem(position), position);
     }
 
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+        if (view.getId() == R.id.message) {
+            hideErrorMessage();
+            swipeRefreshLayout.setRefreshing(true);
+            photoFragmentPresenter.requestGetImages(page);
+        }
+
+    }
 }
