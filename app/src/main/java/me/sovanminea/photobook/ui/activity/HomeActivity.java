@@ -29,6 +29,7 @@ public class HomeActivity extends BaseActivity implements HomeFragment.OnHomeFra
             detailFragment.setSharedElementReturnTransition(new DetailTransition());
         }
 
+        if (detailFragment.isAdded()) return;
         fragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.animator.slide_in, R.animator.slide_down, R.animator.slide_in, R.animator.slide_down)
