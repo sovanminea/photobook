@@ -75,15 +75,18 @@
             android:paddingEnd="20dp"
             android:paddingRight="20dp">
 
-            <View
+            <ImageView
+                android:padding="1dp"
                 android:id="@+id/back"
-                android:layout_width="14dp"
+                android:layout_width="32dp"
                 android:layout_height="24dp"
                 android:layout_alignParentStart="true"
+                android:src="@drawable/ic_back"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/ic_back_selector"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                tools:ignore="ContentDescription" />
 
             <View
                 android:id="@+id/bookmark"

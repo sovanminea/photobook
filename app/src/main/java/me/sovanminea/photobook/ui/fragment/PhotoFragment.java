@@ -23,13 +23,12 @@ public class PhotoFragment extends BasePhotoListFragment implements LoadImageLis
 
     public void updateCreateBookmarkItem(String id) {
         PhotoModel photoModel = mPhotoListAdapter.getItemById(id);
-        photoModel.setBookmark(true);
+        if (photoModel != null) photoModel.setBookmark(true);
     }
 
     public void updateDeleteBookmarkItem(String id) {
         PhotoModel photoModel = mPhotoListAdapter.getItemById(id);
-        Log.d("ddd", "updateDeleteBookmarkItem: " + photoModel.toString());
-        photoModel.setBookmark(false);
+        if (photoModel != null) photoModel.setBookmark(false);
     }
 
     @Override
