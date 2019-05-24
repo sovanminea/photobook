@@ -10,4 +10,5 @@
 
     <color name="image_placeholder">#80323232</color>
     <color name="background_image_detail">#000</color>
+    <color name="dim_foreground">#bebebe</color>
 </resources>

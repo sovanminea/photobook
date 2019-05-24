@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/x2_dimen"
             android:text="@string/author"
-            android:textColor="@android:color/secondary_text_dark" />
+            android:textColor="@color/dim_foreground" />
 
         <TextView
             android:id="@+id/author"
@@ -45,7 +45,7 @@
             android:layout_marginLeft="@dimen/x5_dimen"
             android:padding="@dimen/x2_dimen"
             android:text="@string/size"
-            android:textColor="@android:color/secondary_text_dark"
+            android:textColor="@color/dim_foreground"
             tools:ignore="RtlHardcoded" />
 
         <TextView
